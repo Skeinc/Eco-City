@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 
-class GeneralScreen extends StatefulWidget {
-  const GeneralScreen({super.key});
+class AuthorizationScreen extends StatefulWidget {
+  const AuthorizationScreen({super.key});
 
   @override
-  State<GeneralScreen> createState() => GeneralScreenState();
+  State<AuthorizationScreen> createState() => AuthorizationScreenState();
 }
 
-class GeneralScreenState extends State<GeneralScreen> {
+class AuthorizationScreenState extends State<AuthorizationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
           child: SizedBox(
-            width: double.infinity,
             height: MediaQuery.of(context).size.height,
             child: Column(
               children: [

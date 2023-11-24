@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class GeneralScreen extends StatefulWidget {
-  const GeneralScreen({super.key});
+class RegistrationScreen extends StatefulWidget {
+  const RegistrationScreen({super.key});
 
   @override
-  State<GeneralScreen> createState() => GeneralScreenState();
+  State<RegistrationScreen> createState() => RegistrationScreenState();
 }
 
-class GeneralScreenState extends State<GeneralScreen> {
+class RegistrationScreenState extends State<RegistrationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -20,20 +20,28 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
+  assets:
+    - assets/images/authorization_header_general.png
+    - assets/images/authorization_logo.png
+    - assets/images/icon_telegram.png
+    - assets/images/icon_viber.png
+    - assets/images/icon_vk.png
+    - assets/images/icon_whatsapp.png
+
   fonts:
     - family: Montserrat
       fonts:
-        - asset: lib/assets/fonts/Montserrat-Light.ttf
+        - asset: assets/fonts/Montserrat-Light.ttf
           weight: 300
-        - asset: lib/assets/fonts/Montserrat-Regular.ttf
+        - asset: assets/fonts/Montserrat-Regular.ttf
           weight: 400
-        - asset: lib/assets/fonts/Montserrat-Medium.ttf
+        - asset: assets/fonts/Montserrat-Medium.ttf
           weight: 500
-        - asset: lib/assets/fonts/Montserrat-SemiBold.ttf
+        - asset: assets/fonts/Montserrat-SemiBold.ttf
           weight: 600
-        - asset: lib/assets/fonts/Montserrat-Bold.ttf
+        - asset: assets/fonts/Montserrat-Bold.ttf
           weight: 700
-        - asset: lib/assets/fonts/Montserrat-ExtraBold.ttf
+        - asset: assets/fonts/Montserrat-ExtraBold.ttf
           weight: 800
-        - asset: lib/assets/fonts/Montserrat-Black.ttf
+        - asset: assets/fonts/Montserrat-Black.ttf
           weight: 900

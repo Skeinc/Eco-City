@@ -2,12 +2,12 @@ import 'package:eco_city/utils/constants/colors.dart';
 import 'package:eco_city/utils/constants/textStyles.dart';
 import 'package:flutter/material.dart';
 
-class GeneralButton extends StatelessWidget {
+class LightButton extends StatelessWidget {
   final String title;
   final bool isDisabled;
   final VoidCallback onPressed;
 
-  GeneralButton({
+  const LightButton({
     super.key,
     required this.title,
     required this.isDisabled,
@@ -21,15 +21,14 @@ class GeneralButton extends StatelessWidget {
       height: 50,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        gradient: isDisabled
-            ? null
-            : const LinearGradient(
-                colors: [AppColors.greenColor, AppColors.lightGreenColor],
-              ),
+        border: Border.all(
+          color: AppColors.greenColor,
+          width: 1,
+        ),
       ),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.transparent,
+          backgroundColor: AppColors.whiteColor,
           shadowColor: Colors.transparent,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
@@ -38,7 +37,7 @@ class GeneralButton extends StatelessWidget {
         onPressed: isDisabled ? null : onPressed,
         child: Text(
           title,
-          style: TextStyles.generalButtonTextStyle,
+          style: TextStyles.lightButtonTextStyle,
         ),
       ),
     );
