@@ -1,3 +1,4 @@
+import 'package:eco_city/data/repositories/apiClient.dart';
 import 'package:flutter/material.dart';
 
 class GeneralScreen extends StatefulWidget {
@@ -8,6 +9,11 @@ class GeneralScreen extends StatefulWidget {
 }
 
 class GeneralScreenState extends State<GeneralScreen> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

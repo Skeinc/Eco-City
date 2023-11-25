@@ -1,11 +1,14 @@
+import 'package:eco_city/data/repositories/apiClient.dart';
+import 'package:eco_city/data/repositories/authenticationApiClient.dart';
+import 'package:eco_city/domain/models/registration/registrationModel.dart'
+    as regData;
 import 'package:eco_city/domain/validation/registration/registrationValidate.dart';
-import 'package:eco_city/presentation/bloc/getPhoneFromRegistration.dart'
-    as phone;
 import 'package:eco_city/presentation/widgets/buttons/generalButton.dart';
 import 'package:eco_city/presentation/widgets/inputs/passwordField.dart';
 import 'package:eco_city/presentation/widgets/inputs/textField.dart';
 import 'package:eco_city/utils/constants/textStyles.dart';
 import 'package:eco_city/utils/helpers/parsePhoneNumber.dart';
+import 'package:eco_city/utils/helpers/showSnackBar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -136,7 +139,7 @@ class PersonalDataScreenState extends State<PersonalDataScreen> {
                         child: GeneralButton(
                           title: 'Далее',
                           isDisabled: false,
-                          onPressed: () {
+                          onPressed: () async {
                             setState(() {
                               registrationButtonPressed = true;
                             });
@@ -163,16 +166,28 @@ class PersonalDataScreenState extends State<PersonalDataScreen> {
                                 passwordValidationResult == null &&
                                 passwordConfirmValidationResult == null) {
                               print(
-                                  '${parsePhoneNumber(phone.phone)} ${nameController.text} ${emailController.text} ${addressController.text} ${passwordController.text} ${passwordConfirmController.text}');
+                                  '${parsePhoneNumber(regData.userPhone)} ${nameController.text} ${emailController.text} ${addressController.text} ${passwordController.text} ${passwordConfirmController.text}');
                               if (passwordController.text ==
                                   passwordConfirmController.text) {
-                                print("SUCCESS");
-                                Get.toNamed('/');
+                                try {
+                                  AuthenticationApiClient().register(
+                                      context,
+                                      nameController.text,
+                                      parsePhoneNumber(regData.userPhone),
+                                      'dsadsadsadsadas',
+                                      passwordController.text,
+                                      emailController.text,
+                                      addressController.text,
+                                      'Ekatirenburg');
+                                } catch (error) {
+                                  // ignore: avoid_print
+                                  print(error);
+                                }
                               } else {
-                                print('DIFFERENT PASSWORDS');
+                                showSnackBar(context, 'Пароли не совпадают');
                               }
                             } else {
-                              print("ERRORS");
+                              print('=====VALIDATION ERROR=====');
                             }
                           },
                         ),

@@ -1,14 +1,14 @@
 import 'dart:async';
-
+import 'package:eco_city/data/repositories/authenticationApiClient.dart';
+import 'package:eco_city/domain/models/registration/registrationModel.dart'
+    as regData;
 import 'package:eco_city/domain/validation/registration/registrationValidate.dart';
-import 'package:eco_city/presentation/bloc/getPhoneFromRegistration.dart'
-    as phone;
 import 'package:eco_city/presentation/widgets/buttons/generalButton.dart';
 import 'package:eco_city/presentation/widgets/buttons/lightButton.dart';
 import 'package:eco_city/presentation/widgets/inputs/textField.dart';
 import 'package:eco_city/utils/constants/colors.dart';
 import 'package:eco_city/utils/constants/textStyles.dart';
-import 'package:eco_city/utils/helpers/parsePhoneNumber.dart';
+import 'package:eco_city/utils/helpers/showSnackBar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -30,6 +30,7 @@ class VerifyPhoneScreenState extends State<VerifyPhoneScreen> {
   void initState() {
     super.initState();
     startTimer();
+    AuthenticationApiClient().verifyPhone(context, '1234567890');
   }
 
   void startTimer() {
@@ -98,7 +99,7 @@ class VerifyPhoneScreenState extends State<VerifyPhoneScreen> {
                         margin: const EdgeInsets.only(left: 20, right: 20),
                         alignment: Alignment.center,
                         child: Text(
-                          phone.phone,
+                          regData.userPhone,
                           style: TextStyles.greenCaptionTextStyle
                               .copyWith(fontSize: 16),
                           textAlign: TextAlign.center,
@@ -138,11 +139,11 @@ class VerifyPhoneScreenState extends State<VerifyPhoneScreen> {
                           isDisabled:
                               getFormattedTime() == '00:00' ? false : true,
                           onPressed: () {
-                            print(parsePhoneNumber(phone.phone));
-                            print('SUCCESS');
                             setState(() {
                               seconds = 30;
                               startTimer();
+                              AuthenticationApiClient()
+                                  .verifyPhone(context, '21321312312');
                             });
                           },
                         ),
@@ -164,12 +165,13 @@ class VerifyPhoneScreenState extends State<VerifyPhoneScreen> {
                                     codeController.text, true);
 
                             if (codeValidationResult == null) {
-                              print(
-                                  '${parsePhoneNumber(phone.phone)} ${codeController.text}');
-                              print("SUCCESS");
-                              Get.offAndToNamed('/personalData');
+                              if (codeController.text == regData.userCode) {
+                                Get.offAndToNamed('/personalData');
+                              } else {
+                                showSnackBar(context, 'Неверно введенный код');
+                              }
                             } else {
-                              print("ERRORS");
+                              print('=====VALIDATION ERROR=====');
                             }
                           },
                         ),

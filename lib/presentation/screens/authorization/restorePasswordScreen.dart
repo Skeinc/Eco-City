@@ -1,3 +1,4 @@
+import 'package:eco_city/data/repositories/apiClient.dart';
 import 'package:eco_city/domain/validation/authorization/authorizationValidate.dart';
 import 'package:eco_city/presentation/widgets/buttons/generalButton.dart';
 import 'package:eco_city/presentation/widgets/inputs/textField.dart';
@@ -68,7 +69,7 @@ class RestorePasswordScreenState extends State<RestorePasswordScreen> {
                         child: GeneralButton(
                           title: 'Отправить пароль',
                           isDisabled: false,
-                          onPressed: () {
+                          onPressed: () async {
                             setState(() {
                               sendPasswordButtonPressed = true;
                             });
@@ -79,6 +80,21 @@ class RestorePasswordScreenState extends State<RestorePasswordScreen> {
 
                             if (phoneValidationResult == null) {
                               print(parsePhoneNumber(phoneController.text));
+
+                              final requestData = {
+                                'phone': parsePhoneNumber(phoneController.text),
+                              };
+
+                              try {
+                                final response = await ApiClient()
+                                    .post('restorePassword', requestData);
+                                print(
+                                    'Response status code: ${response.statusCode}');
+                                print('Response body: ${response.body}');
+                              } catch (e) {
+                                print('Error: $e');
+                              }
+
                               print("SUCCESS");
                             } else {
                               print("ERRORS");

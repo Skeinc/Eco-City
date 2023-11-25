@@ -1,3 +1,4 @@
+import 'package:eco_city/data/repositories/authenticationApiClient.dart';
 import 'package:eco_city/domain/validation/authorization/authorizationValidate.dart';
 import 'package:eco_city/presentation/widgets/buttons/lightButton.dart';
 import 'package:eco_city/presentation/widgets/checkboxes/checkbox.dart';
@@ -112,7 +113,7 @@ class AuthorizationScreenState extends State<AuthorizationScreen> {
                         child: LightButton(
                           title: 'Войти',
                           isDisabled: false,
-                          onPressed: () {
+                          onPressed: () async {
                             setState(() {
                               loginButtonPressed = true;
                             });
@@ -127,11 +128,17 @@ class AuthorizationScreenState extends State<AuthorizationScreen> {
 
                             if (phoneValidationResult == null &&
                                 passwordValidationResult == null) {
-                              print(
-                                  '${parsePhoneNumber(phoneController.text)} ${passwordController.text} $isRemember');
-                              print("SUCCESS");
+                              try {
+                                AuthenticationApiClient().login(
+                                    context,
+                                    parsePhoneNumber(phoneController.text),
+                                    passwordController.text);
+                              } catch (error) {
+                                // ignore: avoid_print
+                                print(error);
+                              }
                             } else {
-                              print("ERRORS");
+                              print('=====VALIDATION ERROR=====');
                             }
                           },
                         ),

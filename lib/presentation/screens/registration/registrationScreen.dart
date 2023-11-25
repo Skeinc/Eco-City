@@ -1,6 +1,7 @@
+import 'package:eco_city/data/repositories/authenticationApiClient.dart';
+import 'package:eco_city/domain/models/registration/registrationModel.dart'
+    as regData;
 import 'package:eco_city/domain/validation/registration/registrationValidate.dart';
-import 'package:eco_city/presentation/bloc/getPhoneFromRegistration.dart'
-    as phone;
 import 'package:eco_city/presentation/widgets/buttons/generalButton.dart';
 import 'package:eco_city/presentation/widgets/inputs/textField.dart';
 import 'package:eco_city/utils/constants/colors.dart';
@@ -87,7 +88,7 @@ class RegistrationScreenState extends State<RegistrationScreen> {
                         child: GeneralButton(
                           title: 'Далее',
                           isDisabled: false,
-                          onPressed: () {
+                          onPressed: () async {
                             setState(() {
                               nextButtonPressed = true;
                             });
@@ -95,14 +96,17 @@ class RegistrationScreenState extends State<RegistrationScreen> {
                             final phoneValidationResult =
                                 RegistrationValidate.validatePhone(
                                     phoneController.text, true);
-                            phone.phone = phoneController.text;
-
+                            regData.userPhone = phoneController.text;
                             if (phoneValidationResult == null) {
-                              print(parsePhoneNumber(phoneController.text));
-                              print("SUCCESS");
-                              Get.toNamed('/verifyPhone');
+                              try {
+                                AuthenticationApiClient().checkPhone(context,
+                                    parsePhoneNumber(phoneController.text));
+                              } catch (error) {
+                                // ignore: avoid_print
+                                print(error);
+                              }
                             } else {
-                              print("ERRORS");
+                              print('=====VALIDATION ERROR=====');
                             }
                           },
                         ),
