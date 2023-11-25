@@ -9,6 +9,12 @@ class TextStyles {
     fontWeight: FontWeight.w900,
     color: AppColors.greenColor,
   );
+  static const TextStyle bigHeadlineTextStyle = TextStyle(
+    fontFamily: 'Montserrat',
+    fontSize: 24,
+    fontWeight: FontWeight.w700,
+    color: AppColors.darkColor,
+  );
   static const TextStyle generalHeadlineTextStyle = TextStyle(
     fontFamily: 'Montserrat',
     fontSize: 20,
@@ -23,7 +29,12 @@ class TextStyles {
     fontWeight: FontWeight.w400,
     color: AppColors.darkColor,
   );
-
+  static const TextStyle greenCaptionTextStyle = TextStyle(
+    fontFamily: 'Montserrat',
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    color: AppColors.greenColor,
+  );
   static const TextStyle greyCaptionTextStyle = TextStyle(
     fontFamily: 'Montserrat',
     fontSize: 14,

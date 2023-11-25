@@ -95,16 +95,15 @@ class RestorePasswordScreenState extends State<RestorePasswordScreen> {
                             Get.offAndToNamed('/authorization');
                           },
                           borderRadius: BorderRadius.circular(6),
-                          child: Row(
+                          child: const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
                                 'Перейти к авторизации',
-                                style: TextStyles.greyCaptionTextStyle
-                                    .copyWith(color: AppColors.greenColor),
+                                style: TextStyles.greenCaptionTextStyle,
                               ),
-                              const Icon(
+                              Icon(
                                 Icons.arrow_right_alt_rounded,
                                 color: AppColors.greenColor,
                               )

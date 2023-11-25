@@ -3,7 +3,6 @@ import 'package:eco_city/presentation/widgets/buttons/lightButton.dart';
 import 'package:eco_city/presentation/widgets/checkboxes/checkbox.dart';
 import 'package:eco_city/presentation/widgets/inputs/passwordField.dart';
 import 'package:eco_city/presentation/widgets/inputs/textField.dart';
-import 'package:eco_city/utils/constants/colors.dart';
 import 'package:eco_city/utils/constants/textStyles.dart';
 import 'package:eco_city/utils/helpers/parsePhoneNumber.dart';
 import 'package:flutter/material.dart';
@@ -157,10 +156,9 @@ class AuthorizationScreenState extends State<AuthorizationScreen> {
                             Get.offAndToNamed('/registration');
                           },
                           borderRadius: BorderRadius.circular(6),
-                          child: Text(
+                          child: const Text(
                             'Зарегистрируйтесь!',
-                            style: TextStyles.greyCaptionTextStyle
-                                .copyWith(color: AppColors.greenColor),
+                            style: TextStyles.greenCaptionTextStyle,
                           ),
                         ),
                       ),

@@ -24,6 +24,7 @@ flutter:
   assets:
     - assets/images/authorization_header_general.png
     - assets/images/authorization_logo.png
+    - assets/images/registration_header.png
     - assets/images/icon_telegram.png
     - assets/images/icon_viber.png
     - assets/images/icon_vk.png

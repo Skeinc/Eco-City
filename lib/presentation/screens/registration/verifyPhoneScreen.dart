@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:eco_city/domain/validation/registration/registrationValidate.dart';
 import 'package:eco_city/presentation/bloc/getPhoneFromRegistration.dart'
     as phone;
 import 'package:eco_city/presentation/widgets/buttons/generalButton.dart';
+import 'package:eco_city/presentation/widgets/buttons/lightButton.dart';
 import 'package:eco_city/presentation/widgets/inputs/textField.dart';
 import 'package:eco_city/utils/constants/colors.dart';
 import 'package:eco_city/utils/constants/textStyles.dart';
@@ -9,17 +12,42 @@ import 'package:eco_city/utils/helpers/parsePhoneNumber.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class RegistrationScreen extends StatefulWidget {
-  const RegistrationScreen({super.key});
+class VerifyPhoneScreen extends StatefulWidget {
+  const VerifyPhoneScreen({super.key});
 
   @override
-  State<RegistrationScreen> createState() => RegistrationScreenState();
+  State<VerifyPhoneScreen> createState() => VerifyPhoneScreenState();
 }
 
-class RegistrationScreenState extends State<RegistrationScreen> {
-  TextEditingController phoneController = TextEditingController();
+class VerifyPhoneScreenState extends State<VerifyPhoneScreen> {
+  TextEditingController codeController = TextEditingController();
 
   bool nextButtonPressed = false;
+
+  int seconds = 30;
+
+  @override
+  void initState() {
+    super.initState();
+    startTimer();
+  }
+
+  void startTimer() {
+    Timer.periodic(Duration(seconds: 1), (timer) {
+      if (seconds > 0) {
+        setState(() {
+          seconds--;
+        });
+      } else {
+        timer.cancel();
+      }
+    });
+  }
+
+  String getFormattedTime() {
+    String formattedSeconds = seconds < 10 ? '0$seconds' : '$seconds';
+    return '00:$formattedSeconds';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +87,7 @@ class RegistrationScreenState extends State<RegistrationScreen> {
                             const EdgeInsets.only(left: 20, right: 20, top: 12),
                         alignment: Alignment.center,
                         child: Text(
-                          'Введите ваш номер телефона для верификации аккаунта',
+                          'Введите код, отправленный на номер',
                           style: TextStyles.greyCaptionTextStyle
                               .copyWith(fontSize: 16),
                           textAlign: TextAlign.center,
@@ -67,23 +95,62 @@ class RegistrationScreenState extends State<RegistrationScreen> {
                       ),
                       Container(
                         width: double.infinity,
+                        margin: const EdgeInsets.only(left: 20, right: 20),
+                        alignment: Alignment.center,
+                        child: Text(
+                          phone.phone,
+                          style: TextStyles.greenCaptionTextStyle
+                              .copyWith(fontSize: 16),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Container(
+                        width: double.infinity,
                         margin:
-                            const EdgeInsets.only(left: 20, right: 20, top: 12),
+                            const EdgeInsets.only(left: 20, right: 20, top: 30),
                         alignment: Alignment.center,
                         child: GeneralTextField(
-                          controller: phoneController,
-                          label: 'Phone',
-                          keyboardType: TextInputType.phone,
+                          controller: codeController,
+                          label: 'Code',
+                          keyboardType: TextInputType.number,
+                          maxlength: 4,
                           validator: (value) =>
-                              RegistrationValidate.validatePhone(
+                              RegistrationValidate.validateCode(
                                   value, nextButtonPressed),
+                        ),
+                      ),
+                      Container(
+                        width: double.infinity,
+                        alignment: Alignment.center,
+                        margin:
+                            const EdgeInsets.only(left: 20, right: 20, top: 20),
+                        child: Text(
+                          getFormattedTime(),
+                          style: TextStyles.greyCaptionTextStyle,
+                        ),
+                      ),
+                      Container(
+                        width: double.infinity,
+                        margin:
+                            const EdgeInsets.only(left: 20, right: 20, top: 10),
+                        child: LightButton(
+                          title: 'Повторить код',
+                          isDisabled:
+                              getFormattedTime() == '00:00' ? false : true,
+                          onPressed: () {
+                            print(parsePhoneNumber(phone.phone));
+                            print('SUCCESS');
+                            setState(() {
+                              seconds = 30;
+                              startTimer();
+                            });
+                          },
                         ),
                       ),
                       Container(
                         width: double.infinity,
                         margin:
                             const EdgeInsets.only(left: 20, right: 20, top: 20),
-                        alignment: Alignment.center,
                         child: GeneralButton(
                           title: 'Далее',
                           isDisabled: false,
@@ -92,15 +159,14 @@ class RegistrationScreenState extends State<RegistrationScreen> {
                               nextButtonPressed = true;
                             });
 
-                            final phoneValidationResult =
-                                RegistrationValidate.validatePhone(
-                                    phoneController.text, true);
-                            phone.phone = phoneController.text;
+                            final codeValidationResult =
+                                RegistrationValidate.validateCode(
+                                    codeController.text, true);
 
-                            if (phoneValidationResult == null) {
-                              print(parsePhoneNumber(phoneController.text));
+                            if (codeValidationResult == null) {
+                              print(
+                                  '${parsePhoneNumber(phone.phone)} ${codeController.text}');
                               print("SUCCESS");
-                              Get.toNamed('/verifyPhone');
                             } else {
                               print("ERRORS");
                             }
@@ -113,7 +179,7 @@ class RegistrationScreenState extends State<RegistrationScreen> {
                             const EdgeInsets.only(left: 20, right: 20, top: 20),
                         child: InkWell(
                           onTap: () {
-                            Get.offAndToNamed('/startScreen');
+                            Get.offAndToNamed('/registration');
                           },
                           borderRadius: BorderRadius.circular(6),
                           child: const Row(
@@ -134,7 +200,7 @@ class RegistrationScreenState extends State<RegistrationScreen> {
                       ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),
