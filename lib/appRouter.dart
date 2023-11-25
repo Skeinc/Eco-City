@@ -1,4 +1,5 @@
 import 'package:eco_city/presentation/screens/authorization/authorizationScreen.dart';
+import 'package:eco_city/presentation/screens/authorization/restorePasswordScreen.dart';
 import 'package:eco_city/presentation/screens/general/generalScreen.dart';
 import 'package:eco_city/presentation/screens/notFound/notFoundScreen.dart';
 import 'package:eco_city/presentation/screens/registration/registrationScreen.dart';
@@ -9,13 +10,15 @@ class AppRouter {
   static const initialRoute = '/startScreen';
 
   static final routes = [
-    GetPage(name: '/', page: () => GeneralScreen()),
-    GetPage(name: '/startScreen', page: () => StartScreen()),
-    GetPage(name: '/notFound', page: () => NotFoundScreen()),
-    GetPage(name: '/authorization', page: () => AuthorizationScreen()),
-    GetPage(name: '/registration', page: () => RegistrationScreen()),
+    GetPage(name: '/', page: () => const GeneralScreen()),
+    GetPage(name: '/startScreen', page: () => const StartScreen()),
+    GetPage(name: '/notFound', page: () => const NotFoundScreen()),
+    GetPage(name: '/authorization', page: () => const AuthorizationScreen()),
+    GetPage(
+        name: '/restorePassword', page: () => const RestorePasswordScreen()),
+    GetPage(name: '/registration', page: () => const RegistrationScreen()),
   ];
 
   static final unknownRoute =
-      GetPage(name: '/notFound', page: () => NotFoundScreen());
+      GetPage(name: '/notFound', page: () => const NotFoundScreen());
 }

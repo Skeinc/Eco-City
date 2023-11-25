@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/route_manager.dart';
 
 class App extends StatelessWidget {
+  const App({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -12,18 +14,17 @@ class App extends StatelessWidget {
       title: 'Eco City',
       home: BlocProvider(
         create: (context) => NavigationBloc(),
-        child: AppNavigator(),
+        child: const AppNavigator(),
       ),
     );
   }
 }
 
 class AppNavigator extends StatelessWidget {
+  const AppNavigator({super.key});
+
   @override
   Widget build(BuildContext context) {
-    final NavigationBloc navigationBloc =
-        BlocProvider.of<NavigationBloc>(context);
-
     return BlocBuilder<NavigationBloc, String>(
       builder: (context, route) {
         return GetMaterialApp(

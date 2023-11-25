@@ -83,7 +83,7 @@ class StartScreenState extends State<StartScreen> {
                           children: [
                             InkWell(
                               onTap: () {
-                                Get.toNamed('/notFound');
+                                Get.offAndToNamed('/notFound');
                               },
                               borderRadius: BorderRadius.circular(20),
                               child: Image.asset(
@@ -97,7 +97,7 @@ class StartScreenState extends State<StartScreen> {
                             ),
                             InkWell(
                               onTap: () {
-                                Get.toNamed('/notFound');
+                                Get.offAndToNamed('/notFound');
                               },
                               borderRadius: BorderRadius.circular(20),
                               child: Image.asset(
@@ -111,7 +111,7 @@ class StartScreenState extends State<StartScreen> {
                             ),
                             InkWell(
                               onTap: () {
-                                Get.toNamed('/notFound');
+                                Get.offAndToNamed('/notFound');
                               },
                               borderRadius: BorderRadius.circular(20),
                               child: Image.asset(
@@ -125,7 +125,7 @@ class StartScreenState extends State<StartScreen> {
                             ),
                             InkWell(
                               onTap: () {
-                                Get.toNamed('/notFound');
+                                Get.offAndToNamed('/notFound');
                               },
                               borderRadius: BorderRadius.circular(20),
                               child: Image.asset(
@@ -142,9 +142,10 @@ class StartScreenState extends State<StartScreen> {
                         alignment: Alignment.center,
                         margin:
                             const EdgeInsets.only(left: 20, right: 20, top: 20),
-                        child: const Text(
+                        child: Text(
                           'Вы можете найти нас здесь',
-                          style: TextStyles.greyCaptionTextStyle,
+                          style: TextStyles.greyCaptionTextStyle
+                              .copyWith(fontSize: 12),
                         ),
                       ),
                     ],

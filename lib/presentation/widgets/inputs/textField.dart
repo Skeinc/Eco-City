@@ -1,5 +1,6 @@
 import 'package:eco_city/utils/constants/colors.dart';
 import 'package:eco_city/utils/constants/textStyles.dart';
+import 'package:eco_city/utils/helpers/phoneFormatter.dart';
 import 'package:flutter/material.dart';
 
 class GeneralTextField extends StatelessWidget {
@@ -32,6 +33,7 @@ class GeneralTextField extends StatelessWidget {
       style: TextStyles.inputTextStyle,
       keyboardType: keyboardType,
       maxLength: maxlength,
+      inputFormatters: [if (keyboardType == TextInputType.phone) maskFormatter],
       decoration: InputDecoration(
         labelText: label,
         labelStyle: TextStyles.inputLabelTextStyle,
