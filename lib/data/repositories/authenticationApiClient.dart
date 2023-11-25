@@ -4,6 +4,7 @@ import 'package:eco_city/domain/models/registration/registrationModel.dart'
 import 'package:eco_city/data/repositories/apiClient.dart';
 import 'package:eco_city/utils/helpers/showSnackBar.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthenticationApiClient {
   Future<void> login(context, String phone, String password) async {
@@ -15,6 +16,14 @@ class AuthenticationApiClient {
     if (response.statusCode >= 200 && response.statusCode < 300) {
       final responseBody = jsonDecode(response.body);
       if (responseBody['success'] == true) {
+        var accessToken = response.headers.values
+            .toString()
+            .split('accessToken=')[1]
+            .split(';')
+            .first;
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString('accessToken', accessToken);
+        print(accessToken);
       } else {
         showSnackBar(context, responseBody['message']);
       }

@@ -1,9 +1,13 @@
+import 'dart:convert';
 import 'package:eco_city/presentation/widgets/buttons/generalButton.dart';
 import 'package:eco_city/presentation/widgets/buttons/lightButton.dart';
 import 'package:eco_city/utils/constants/colors.dart';
 import 'package:eco_city/utils/constants/textStyles.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../../data/repositories/apiClient.dart';
+import '../../../utils/helpers/showSnackBar.dart';
 
 class StartScreen extends StatefulWidget {
   const StartScreen({super.key});
@@ -13,6 +17,11 @@ class StartScreen extends StatefulWidget {
 }
 
 class StartScreenState extends State<StartScreen> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

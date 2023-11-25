@@ -1,5 +1,6 @@
 import 'package:eco_city/data/repositories/apiClient.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class GeneralScreen extends StatefulWidget {
   const GeneralScreen({super.key});
