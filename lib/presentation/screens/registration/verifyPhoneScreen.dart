@@ -167,6 +167,7 @@ class VerifyPhoneScreenState extends State<VerifyPhoneScreen> {
                               print(
                                   '${parsePhoneNumber(phone.phone)} ${codeController.text}');
                               print("SUCCESS");
+                              Get.offAndToNamed('/personalData');
                             } else {
                               print("ERRORS");
                             }

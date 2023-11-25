@@ -2,6 +2,7 @@ import 'package:eco_city/presentation/screens/authorization/authorizationScreen.
 import 'package:eco_city/presentation/screens/authorization/restorePasswordScreen.dart';
 import 'package:eco_city/presentation/screens/general/generalScreen.dart';
 import 'package:eco_city/presentation/screens/notFound/notFoundScreen.dart';
+import 'package:eco_city/presentation/screens/registration/personalDataScreen.dart';
 import 'package:eco_city/presentation/screens/registration/registrationScreen.dart';
 import 'package:eco_city/presentation/screens/registration/verifyPhoneScreen.dart';
 import 'package:eco_city/presentation/screens/startScreen/startScreen.dart';
@@ -19,6 +20,7 @@ class AppRouter {
         name: '/restorePassword', page: () => const RestorePasswordScreen()),
     GetPage(name: '/registration', page: () => const RegistrationScreen()),
     GetPage(name: '/verifyPhone', page: () => const VerifyPhoneScreen()),
+    GetPage(name: '/personalData', page: () => const PersonalDataScreen()),
   ];
 
   static final unknownRoute =
